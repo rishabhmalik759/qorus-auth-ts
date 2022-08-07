@@ -1,0 +1,10 @@
+{
+  "extends": "@tsconfig/node14/tsconfig.json",
+  "include": ["lib", "utils"],
+  "exclude": ["node_modules"],
+  "types": ["node"],
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "rootDir": ".",
+}

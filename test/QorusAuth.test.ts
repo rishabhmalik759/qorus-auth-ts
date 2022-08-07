@@ -1,0 +1,70 @@
+"use strict";
+
+import QorusAuth from "../lib/QorusAuth";
+import MockAdapter from "axios-mock-adapter";
+import httpsAxios from "../utils/httpsAxios";
+import logger from "../lib/logger";
+
+describe("QorusAuth Utility Class Tests", () => {
+  let mock: MockAdapter;
+  const qorus = new QorusAuth();
+
+  beforeAll(() => {
+    mock = new MockAdapter(httpsAxios);
+  });
+
+  afterEach(() => {
+    mock.reset();
+  });
+
+  describe("When authentication is successful", () => {
+    it("should return user token after authentication", async () => {
+      const usrToken = "336d9306-3b70-41df-9427-c051d25886b2";
+      mock
+        .onPost(
+          "https://hq.qoretechnologies.com:31011/api/latest/public/login",
+          {
+            user: "rmalik",
+            pass: "yzu2d8smRoCetW8",
+          }
+        )
+        .reply(200, usrToken);
+
+      let result;
+      try {
+        result = await qorus.login({
+          url: "https://hq.qoretechnologies.com:31011/api/latest/public/login",
+          user: "rmalik",
+          pass: "yzu2d8smRoCetW8",
+        });
+      } catch (error:any) {
+        logger.error(`${error.code} ${error.message}`);
+      }
+
+      expect(mock.history.post[0].data).not.toBeNull();
+      expect(result).toEqual(usrToken);
+    });
+
+    it("Should return current user token if the user is authenticated", () => {
+      expect(qorus.getUserToken()).not.toBeNull();
+    });
+
+    it("Should logout the user", () => {
+      qorus.logout();
+      expect(qorus.getUserToken()).toEqual(null);
+    });
+  });
+
+  describe("When authentication is not successful", () => {
+    it("Should return error if the user can't sign in", async () => {
+      let err = { message: "", code: "" };
+      try {
+        await qorus.login({ user: "bob", pass: "lsjdfkl" });
+      } catch (error: any) {
+        err.message = error.message;
+      }
+
+      expect(err.message).toContain("Couldn't sign in user,");
+    });
+  });
+});
