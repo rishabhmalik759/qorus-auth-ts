@@ -1,7 +1,4 @@
 # Qorus Authentication NodeJS Utility
-
-## Clone the project 
-
 ## Build the project
 ```
 npm run build
@@ -16,3 +13,22 @@ npm run clean
 ```
 
 ## Usage
+
+Install qore-login as a dependencies
+```
+ npm install --save [https://github.com/rishabhmalik759/qorus-auth-ts](https://github.com/rishabhmalik759/qorus-auth-ts/tarball/master).git
+```
+
+The dependency will be added to package.json
+```
+"dependencies": {
+        "qore-login": "git+[https://github.com/rishabhmalik759/qorus-auth-ts.git)"
+}
+```
+
+Then use the dependency normally
+```
+import qore from "qore-login"
+
+const qore = require("qore-login")
+```
