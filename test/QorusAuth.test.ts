@@ -18,7 +18,7 @@ describe("QorusAuth Utility Class Tests", () => {
   });
 
   describe("When authentication is successful", () => {
-    it("should return user token after authentication", async () => {
+    it("Should return user token after authentication", async () => {
       const usrToken = "336d9306-3b70-41df-9427-c051d25886b2";
       mock
         .onPost(
@@ -37,7 +37,7 @@ describe("QorusAuth Utility Class Tests", () => {
           user: "rmalik",
           pass: "yzu2d8smRoCetW8",
         });
-      } catch (error:any) {
+      } catch (error: any) {
         logger.error(`${error.code} ${error.message}`);
       }
 
@@ -45,12 +45,27 @@ describe("QorusAuth Utility Class Tests", () => {
       expect(result).toEqual(usrToken);
     });
 
+    it("should return the current auth config", () => {
+      const config = qorus.getConfig();
+
+      expect(config).toEqual(
+        "https://hq.qoretechnologies.com:31011/api/latest/public/login"
+      );
+    });
+
     it("Should return current user token if the user is authenticated", () => {
       expect(qorus.getUserToken()).not.toBeNull();
     });
 
+    it("Should change the config", () => {
+      qorus.config("https://www.google.com");
+
+      expect(qorus.getConfig()).toEqual("https://www.google.com");
+    });
+
     it("Should logout the user", () => {
       qorus.logout();
+
       expect(qorus.getUserToken()).toEqual(null);
     });
   });

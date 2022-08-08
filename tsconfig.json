@@ -4,7 +4,11 @@
   "exclude": ["node_modules"],
   "types": ["node"],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "declarationMap": true    
   },
-  "rootDir": ".",
+  "rootDir": "."
 }

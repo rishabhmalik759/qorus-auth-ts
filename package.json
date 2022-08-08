@@ -8,7 +8,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --coverage && coveralls < ./coverage/lcov.info"
+    "test": "jest",
+    "build": "npx tsc",
+    "clean": "del-cli --force ./dist"
   },
   "author": "Rishabh Malik",
   "license": "ISC",
@@ -18,7 +20,6 @@
     "@types/jest": "^28.1.6",
     "@types/node": "^18.6.4",
     "axios-mock-adapter": "^1.21.1",
-    "coveralls": "^3.1.1",
     "ts-jest": "^28.0.7",
     "typedoc": "^0.23.10",
     "typescript": "^4.7.4"

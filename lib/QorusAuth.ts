@@ -1,7 +1,7 @@
 "use strict";
 
 import logger from "./logger";
-import httpsAxios from '../utils/httpsAxios';
+import httpsAxios from "../utils/httpsAxios";
 
 interface ILoginParams {
   url?: string;
@@ -11,10 +11,11 @@ interface ILoginParams {
 
 class QorusAuth {
   usrToken?: string;
+  endpoint: string =
+    "https://hq.qoretechnologies.com:31011/api/latest/public/login";
 
   async login(params: ILoginParams) {
     const {
-      url = "https://hq.qoretechnologies.com:31011/api/latest/public/login",
       user,
       pass,
     } = params;
@@ -22,28 +23,44 @@ class QorusAuth {
     try {
       const resp = await httpsAxios({
         method: "post",
-        url: url,
+        url: this.endpoint,
         data: { user: user, pass: pass },
       });
-      logger.info(`User signed in with token : ${JSON.stringify(resp.data)}`)
+      logger.info(`User signed in with token : ${JSON.stringify(resp.data)}`);
       this.usrToken = resp.data;
       return resp.data;
     } catch (error: any) {
-      logger.error(`Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`)
-      throw new Error(`Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`);
+      logger.error(
+        `Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`
+      );
+      throw new Error(
+        `Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`
+      );
     }
   }
 
-  logout(){
+  logout() {
     this.usrToken = undefined;
+  }
+
+  config(endpoint: string) {
+    if (this.usrToken) {
+      this.logout();
+    }
+    this.endpoint = endpoint;
+    logger.info("Configurations changed please login again");
+  }
+
+  getConfig() {
+    return this.endpoint;
   }
 
   getUserToken() {
     if (this.usrToken) return this.usrToken;
     else {
       logger.error("User is not signed in...");
-      return null
-    };
+      return null;
+    }
   }
 }
 

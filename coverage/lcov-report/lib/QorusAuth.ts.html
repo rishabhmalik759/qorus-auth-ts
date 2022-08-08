@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>21/21</span>
             </div>
         
             
@@ -113,7 +113,25 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -125,6 +143,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,12 +165,28 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,7 +202,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 &nbsp;
 import logger from "./logger";
-import httpsAxios from '../utils/httpsAxios';
+import httpsAxios from "../utils/httpsAxios";
 &nbsp;
 interface ILoginParams {
   url?: string;
@@ -176,10 +212,12 @@ interface ILoginParams {
 &nbsp;
 class QorusAuth {
   usrToken?: string;
+  endPoint: string =
+    "https://hq.qoretechnologies.com:31011/api/latest/public/login";
 &nbsp;
   async login(params: ILoginParams) {
     const {
-      url = "https://hq.qoretechnologies.com:31011/api/latest/public/login",
+      // url = "https://hq.qoretechnologies.com:31011/api/latest/public/login",
       user,
       pass,
     } = params;
@@ -187,28 +225,44 @@ class QorusAuth {
     try {
       const resp = await httpsAxios({
         method: "post",
-        url: url,
+        url: this.endPoint,
         data: { user: user, pass: pass },
       });
-      logger.info(`User signed in with token : ${JSON.stringify(resp.data)}`)
+      logger.info(`User signed in with token : ${JSON.stringify(resp.data)}`);
       this.usrToken = resp.data;
       return resp.data;
     } catch (error: any) {
-      logger.error(`Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`)
-      throw new Error(`Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`);
+      logger.error(
+        `Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`
+      );
+      throw new Error(
+        `Couldn't sign in user, ErrorCode: ${error.code}, ErrorMessage: ${error.message}`
+      );
     }
   }
 &nbsp;
-  logout(){
+  logout() {
     this.usrToken = undefined;
+  }
+&nbsp;
+  config(endPoint: string) {
+    if (this.usrToken) {
+      this.logout();
+    }
+    this.endPoint = endPoint;
+    logger.info("Configurations changed please login again");
+  }
+&nbsp;
+  getConfig() {
+    return this.endPoint;
   }
 &nbsp;
   getUserToken() {
     if (this.usrToken) return this.usrToken;
     else {
       logger.error("User is not signed in...");
-      return null
-    };
+      return null;
+    }
   }
 }
 &nbsp;
@@ -220,7 +274,7 @@ export default QorusAuth;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-08-07T21:44:00.289Z
+                at 2022-08-08T02:20:06.163Z
             </div>
         <script src="../prettify.js"></script>
         <script>
