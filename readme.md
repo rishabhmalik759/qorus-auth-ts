@@ -32,3 +32,9 @@ import qore from "qore-login"
 
 const qore = require("qore-login")
 ```
+
+User can login to the auth endpoint using
+```
+const qoreAuth = new qore();
+qoreAuth.login(username, password);
+```
